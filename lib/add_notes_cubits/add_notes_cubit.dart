@@ -6,15 +6,15 @@ import 'package:tone_app/models/note_model.dart';
 part 'add_notes_state.dart';
 
 class AddNotesCubit extends Cubit<AddNotesState> {
-  AddNotesCubit() : super(AddNotesInitial as AddNotesState);
-  addNote(NoteModel note) {
+  AddNotesCubit() : super(AddNotesInitial());
+  addNote(NoteModel note) async {
     emit(AddNotesLoading());
     try {
       var noteBox = Hive.box<NoteModel>(kBoxNotes);
-      noteBox.add(note);
+      await noteBox.add(note);
       emit(AddNotesSaccess());
-    } on Exception catch (e) {
-      AddNotesFailure(e.toString());
+    } catch (e) {
+      emit(AddNotesFailure(e.toString()));
     }
   }
 }
