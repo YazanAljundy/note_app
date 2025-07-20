@@ -6,6 +6,7 @@ import 'package:tone_app/views/widgets/note_item.dart';
 
 class NotesListView extends StatelessWidget {
   const NotesListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -15,6 +16,8 @@ class NotesListView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: ListView.builder(
+              reverse: true,
+              controller: ScrollController(),
               padding: EdgeInsets.zero,
               itemCount: notes.length,
               itemBuilder:
