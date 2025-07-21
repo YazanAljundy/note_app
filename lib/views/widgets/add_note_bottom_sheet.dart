@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tone_app/cubits/add_notes_cubit/add_notes_cubit.dart';
+import 'package:tone_app/cubits/cubit/notes_cubit.dart';
 import 'package:tone_app/views/widgets/add_note_form.dart';
 
 class AddNoteBottomSeet extends StatelessWidget {
@@ -14,6 +15,7 @@ class AddNoteBottomSeet extends StatelessWidget {
         listener: (context, state) {
           if (state is AddNotesFailure) {}
           if (state is AddNotesSaccess) {
+            BlocProvider.of<NotesCubit>(context).fetchAllNotes();
             Navigator.pop(context);
           }
         },
